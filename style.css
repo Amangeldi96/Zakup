@@ -112,11 +112,11 @@ body {
     flex-shrink: 0;
 }
 
-/* Негизги маалымат бөлүгү */
+/* Негизги маалымат бөлүгү (Оңдолду) */
 .content-body {
     flex: 1;
     overflow-y: auto;
-    overflow-x: hidden;
+    overflow-x: auto;
     background: #ffffff;
     display: flex;
     flex-direction: column;
@@ -131,6 +131,7 @@ body {
 
 .procurement-table {
     width: 100%;
+    table-layout: auto;
     border-collapse: collapse;
     text-align: left;
     font-size: 13px;
@@ -139,7 +140,7 @@ body {
 .procurement-table th, .procurement-table td {
     padding: 10px 12px;
     border-bottom: 1px solid var(--border);
-    white-space: nowrap;
+    /* white-space: nowrap алынып салынды, анткени ал текстти бир сапка созуп, таблицаны жарым кылып жашырып жаткан эле */
 }
 
 .procurement-table th {
@@ -437,15 +438,50 @@ body {
 /* Экран өлчөмдөрү */
 @media (min-width: 769px) {
     .app-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        position: relative;
+        width: 100%;
+        max-width: none;
         height: 100vh;
-        border-left: 1px solid var(--border);
-        border-right: 1px solid var(--border);
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        border-left: none;
+        border-right: none;
+        border-radius: 0;
     }
-    .mobile-cards { display: none !important; }
-    .table-responsive { display: block !important; }
+
+    .mobile-cards {
+        display: none !important;
+    }
+
+    .table-responsive {
+        display: block !important;
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .procurement-table {
+        width: 100%;
+        min-width: 0;
+        table-layout: auto;
+    }
+
+    .procurement-table th,
+    .procurement-table td {
+        padding: 9px 10px;
+        white-space: nowrap;
+    }
+
+    /* Карандаш турган акыркы колонка */
+    .procurement-table th:last-child,
+    .procurement-table td:last-child {
+        width: 70px;
+        min-width: 70px;
+        text-align: center;
+    }
 }
 
 @media (max-width: 768px) {
